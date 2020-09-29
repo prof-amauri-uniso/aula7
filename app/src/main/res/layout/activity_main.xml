@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Ao contrário do que vimos até o momento, os layouts de restrição possuem uma biblioteca própria,
+com isso é necessário adiciona-la como dependencia, algo que ao se criar o projeto o android
+studio já fez por nós. Como usa uma bibliteca externa, a declaração tem que fazer refêrencia a
+essa biblioteca, fazendo com a que a notação fique como abaixo
+
+Nos layouts de restrições não especificamos a posição dos elementos visuais ao arrasta-los para um ponto
+da tela. Em vez disso, definimos restrições para especificar o posicionamento. Uma restrição é uma conexão
+ou ligação que informa ao layout o posicionamento do elemento visual. Por exemplo, você pode usar uma
+restrição para ligar uma exibição á borda inicial do layout ou para coloca-la sob outro elemento visual
+
+Em um layout de restrição, cada exibição deve dispor de no minimo duas restrições (uma vertical e uma
+horizontal) para especificar sua posição. Se a restrição horaizontal for omitida, o elemento visual será
+posicionado próximo a borda inicial do layout. Se a restrição horizontal for omitida, o elemento visual
+ será posicionado na parte superior do layout. Isso irá ocorrer independente de como estiver a visualização
+ no editor. As restrições podem ser inseridas também baseadas em outros elementos que não as bordas do
+ layout, por exemplo quando queremos que um elemento fique ao lado de outro ou acima/abaixo-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!--MARGEM E VIES(BIAS)
+    Quando adicionamos uma restrição, o editor adiciona automaticamente uma margem para a restrição.
+    Podemos alterar esse valor no editor, quando selecionamos o elemento, do lado direito aparece
+    as configurações das restrições do elemento. Para cada restrição adicionda, podemos ver uma caixa de
+    seleção. Ali tem alguns valores sugeridos mas podemos digitar o valor que quisermos na unidade de dp
+
+    Uma vez configurado o as restrições, podemos modificar o posicionamento utilizando o vies, ou em inglês,
+    o bias. Com ele podemos modificar a relação do elemento com a restrição, assim, ao adicionar
+    restrições a esquerda e a direita, podemos ter resultados diferentes de que um elemento sempre centralizado.
+    Podemos modificar o bias no mesmo local do editor onde configuramos margens e outras configurações
+    do elemento, no lado direito, na paleta de propriedades. Ele aparece ali na forma de uma barra deslizante.
+    Deve aparecer uma para as restrições verticais e uma para as restrições horaizontais. Também podemos
+    alterar modificando as propriedades layout_constraintVertical_bias, inserindo valores entre 0 e 1-->
+
+
+
+    <!--REAPROVEITAR LAYOUTS
+    Podemos reaproveitar layouts, para agruparmos elementos visuais. Para isso devemos ter o layout
+    a ser reaproveitado criado, e depois, no layout onde formos inserir, usar a tag include. No caso
+    especifico de estarmos usando layouts de restrição, para que a inclusão fucione adequadamente temos
+    que ter configurado as propriedades android:layout_width e android:layout_height-->
+    <include
+        android:id="@+id/include"
+        layout="@layout/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></include>
+
+    <!--CENTRALIZAR
+        Para centralizar um elemento horizontalmente devemos criar uma restrição a  direita e a esquerda para o elemento
+        como no botão abaixo. Da mesma forma, para centralizarmos verticalmente, devemos ter restrições
+        para as partes inferior e superior do layout. Nesse caso, o botão deveria ficar centralizado
+        horizontalmente, mas na vertica deveria estar na parte de baixo da tela, por isso criamos mais
+        uma restrição com a parte inferior do layout para posiciona-lo
+
+        Como agora o elemento está ligado aos dois lados do layout, o botão será exibido no centro
+        em qualquer tamanho ou orientação de tela.-->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Para:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <!--CONFIGURAR ELEMENTOS PARA OCUPAREM O TAMANHO DAS RESTRIÇÕES
+        Uma vez confgurados as restrições do elemento, podemos configurar para que a largura ou
+        a altura ocupem o tamanho inteiro da restrição. Para isso funcionar, basta que configuremos
+        as propriedades  layout_width e/ou layout_height com o valor de 0dp-->
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Assunto:"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+
+    <EditText
+        android:id="@+id/edtMensagem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="Mensagem:"
+        android:inputType="textMultiLine|textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Endereço de email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/include"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
